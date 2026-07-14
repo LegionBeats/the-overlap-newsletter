@@ -1,0 +1,241 @@
+# The Overlap Newsletter - Design System & Context
+
+## Project Overview
+Newsletter at the intersection of music, marketing, and AI. 
+**Story**: Built two 7-figure businesses (180K + 70K audiences), spoke at FunnelHackingLive, lost it all, now rebuilding from zero while learning AI.
+**Tone**: Personal + vulnerable (but not performing), clearly authoritative, honest about struggle.
+**Audience**: Musicians who care about business + Marketers obsessed with culture. Everyone needs to learn both.
+
+## Brand Identity
+**Name**: The Overlap
+**Tagline**: "Where years of seven-figure marketing scale meets the reality of rebuilding with AI from ground zero"
+**Core Values**: Real expertise, honest struggle, actual tactics
+
+## Color Palette
+- Primary Charcoal: #171e19
+- Accent Yellow: #ffe17c
+- Dark Gray: #272727
+- Sage: #b7c6c2
+- White: #ffffff
+- Light Background: #f8f9fa
+
+## Typography
+- **Headlines**: Anton (uppercase, 8xl-9xl, line-height 0.9)
+- **Body**: Satoshi (400/500/700 weights)
+- Font Import: `https://api.fontshare.com/v2/css?f[]=anton@400&f[]=satoshi@400,500,700&display=swap`
+
+## Design System Rules
+- Grid background: 40px pattern with linear-gradient sage at 20% opacity
+- Borders: 1px #171e19/10% on light, #b7c6c2/10% on dark
+- Transitions: 300ms cubic-bezier(0.4, 0, 0.2, 1)
+- Spacing: 4px base unit, consistent rhythm
+- Radius scale: 2xl (16px), 3xl (24px), rounded-full
+
+## Key Animation/Interactions
+- Parallax geometric shapes moving on scroll (different speeds per layer)
+- Cards hover with shadow increase + slight translate-y -2
+- Featured issue: rotating borders on hover
+- Yellow highlight bars with slight rotation animation
+- Smooth color transitions on hover states
+
+## Reusable Components
+
+### Fixed Navigation Bar
+```html
+<nav class="fixed top-0 w-full h-20 bg-white/90 backdrop-blur-md z-50 border-b border-[#171e19]/10 flex items-center justify-between px-8 xl:px-12">
+  <a href="#" id="nav-logo-link" class="font-anton text-3xl flex items-baseline">
+    THE OVERLAP<span class="text-[#ffe17c] text-4xl">.</span>
+  </a>
+  <div class="hidden md:flex gap-10 items-center">
+    <a href="#" id="nav-home-link" class="text-sm font-medium hover:text-[#b7c6c2] transition-colors uppercase tracking-widest">Home</a>
+    <a href="#archive" id="nav-archive-link" class="text-sm font-medium hover:text-[#b7c6c2] transition-colors uppercase tracking-widest">Archive</a>
+    <a href="#about" id="nav-about-link" class="text-sm font-medium hover:text-[#b7c6c2] transition-colors uppercase tracking-widest">About</a>
+  </div>
+  <div class="flex items-center gap-6">
+    <a href="#signup" id="nav-subscribe-btn" class="bg-[#171e19] text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[#272727] transition-custom shadow-md hover:shadow-xl">
+      Subscribe
+    </a>
+  </div>
+</nav>
+```
+
+### Yellow Highlight (Behind Text)
+```css
+.yellow-highlight {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
+.yellow-highlight::before {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: -2%;
+  width: 104%;
+  height: 35%;
+  background-color: var(--yellow);
+  z-index: -1;
+  transform: rotate(-1deg);
+}
+```
+
+### Issue Card (Light Variant)
+```html
+<div class="group bg-[#f8f9fa] p-8 rounded-3xl border border-[#171e19]/10 relative overflow-hidden transition-custom hover:shadow-2xl hover:-translate-y-2 flex flex-col">
+  <div class="flex gap-2 mb-6">
+    <span class="px-3 py-1 bg-[#171e19] text-white text-[10px] font-bold uppercase rounded-full">AI</span>
+    <span class="px-3 py-1 bg-[#b7c6c2]/20 text-[#171e19] text-[10px] font-bold uppercase rounded-full">Marketing</span>
+  </div>
+  <h3 class="font-anton text-3xl mb-4 group-hover:text-[#b7c6c2] transition-colors">HEADLINE</h3>
+  <p class="text-sm text-[#171e19]/60 line-clamp-3 mb-auto">Preview text...</p>
+  <div class="mt-8 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity">
+    <span class="text-xs font-bold uppercase tracking-widest">Read More</span>
+    <iconify-icon icon="ph:plus-bold" class="text-xl"></iconify-icon>
+  </div>
+  <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-[#ffe17c]/20 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
+</div>
+```
+
+### Value Props Card (3-column section)
+```html
+<div class="bg-[#f8f9fa] p-10 rounded-3xl border border-[#171e19]/5 transition-custom hover:shadow-2xl hover:-translate-y-2 group">
+  <div class="w-12 h-12 bg-[#171e19] text-white flex items-center justify-center rounded-xl mb-8 group-hover:bg-[#ffe17c] group-hover:text-[#171e19] transition-colors">
+    <iconify-icon icon="ph:briefcase-bold" class="text-2xl"></iconify-icon>
+  </div>
+  <h3 class="font-anton text-3xl mb-4">REAL EXPERTISE</h3>
+  <p class="text-[#171e19]/60 leading-relaxed">Body text...</p>
+</div>
+```
+
+### Hero Section Structure
+- Badge with yellow dot indicator + "REBUILDING IN PUBLIC" text
+- Headline: Anton 8xl-9xl with yellow-highlight on key word
+- Subheadline: Bold text + supporting paragraph
+- Floating geometric shapes in background (parallax effect)
+- Email signup form: input + yellow CTA button
+- Grid background pattern on white
+
+### Featured Issue Card (Dark)
+```html
+<div class="bg-[#171e19] text-white rounded-[3rem] p-12 lg:p-20 relative overflow-hidden flex flex-col lg:flex-row gap-16 card-hover shadow-2xl transition-custom">
+  <!-- Left: Text content -->
+  <div class="flex-1 relative z-10">
+    <span class="text-[#ffe17c] font-bold tracking-widest uppercase text-xs mb-6 block">Featured Issue</span>
+    <h2 class="font-anton text-6xl md:text-7xl mb-8 leading-[0.9]">HEADLINE</h2>
+    <p class="text-[#b7c6c2] text-xl font-medium mb-10 max-w-xl">Description...</p>
+    <a href="#" class="inline-flex items-center gap-4 text-white hover:text-[#ffe17c] transition-colors group">
+      <span class="font-anton text-2xl uppercase">Read the Full Story</span>
+      <iconify-icon icon="ph:arrow-right-bold" class="text-2xl group-hover:translate-x-3 transition-transform"></iconify-icon>
+    </a>
+  </div>
+  <!-- Right: Abstract visual (rotating borders on hover) -->
+  <div class="flex-1 flex items-center justify-center relative">
+    <div class="w-full aspect-square max-w-[400px] relative">
+      <div class="absolute inset-0 border-2 border-[#b7c6c2]/20 rotate-12 transition-transform duration-1000 group-hover:rotate-45"></div>
+      <div class="absolute inset-4 border-2 border-[#b7c6c2]/40 -rotate-12 transition-transform duration-1000 group-hover:-rotate-90"></div>
+      <div class="absolute inset-12 bg-[#272727] flex items-center justify-center">
+        <div class="w-24 h-24 bg-[#ffe17c] animate-pulse rounded-sm"></div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Split Section (Before/After)
+```html
+<!-- Left: The Past (charcoal background) -->
+<div class="flex-1 bg-[#171e19] text-white p-12 lg:p-24 flex flex-col justify-center relative overflow-hidden">
+  <span class="text-[#b7c6c2] text-xs font-bold tracking-widest uppercase mb-4">The Version I Hated</span>
+  <h2 class="font-anton text-6xl md:text-7xl mb-12 text-white">WHEN I HAD IT ALL</h2>
+  <ul class="space-y-10 max-w-lg">
+    <li class="flex items-start gap-5">
+      <div class="bg-red-500/10 p-2.5 rounded-lg mt-1 shrink-0">
+        <iconify-icon icon="ph:x-circle-bold" class="text-red-400 text-2xl"></iconify-icon>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-2">POINT</h3>
+        <p class="text-[#b7c6c2]">Description...</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Right: The Future (dark gray + yellow border) -->
+<div class="flex-1 bg-[#272727] text-white border-l-4 border-[#ffe17c] p-12 lg:p-24 flex flex-col justify-center relative overflow-hidden">
+  <span class="text-[#ffe17c] text-xs font-bold tracking-widest uppercase mb-4">Starting from Zero</span>
+  <h2 class="font-anton text-6xl md:text-7xl mb-12 text-[#ffe17c]\">WHO I'M BECOMING</h2>
+  <ul class="space-y-10 max-w-lg">
+    <li class="flex items-start gap-5">
+      <div class="bg-[#ffe17c]/10 p-2.5 rounded-lg mt-1 shrink-0">
+        <iconify-icon icon="ph:check-circle-bold" class="text-[#ffe17c] text-2xl"></iconify-icon>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-2">POINT</h3>
+        <p class="text-gray-300">Description...</p>
+      </div>
+    </li>
+  </ul>
+</div>
+```
+
+### Final CTA Section (Yellow Background)
+```html
+<section class="relative py-32 bg-[#ffe17c] overflow-hidden flex items-center justify-center min-h-[80vh]">
+  <!-- Decorative background text at 5% opacity -->
+  <div class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none opacity-5 select-none">
+    <h2 class="font-anton text-[18vw] leading-none whitespace-nowrap text-[#171e19]">THE OVERLAP THE OVERLAP</h2>
+    <h2 class="font-anton text-[18vw] leading-none whitespace-nowrap text-[#171e19]">THE OVERLAP THE OVERLAP</h2>
+  </div>
+
+  <!-- Content (z-10) -->
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <h2 class="font-anton text-7xl md:text-9xl text-[#171e19] mb-8 leading-[0.85]">I'M LEARNING.<br>JOIN ME.</h2>
+    <p class="text-xl md:text-2xl text-[#171e19]/80 font-bold mb-14 max-w-2xl mx-auto">Weekly insights at the intersection of music, marketing, and AI. Real story. Real expertise. No bullshit.</p>
+    
+    <form class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto mb-8" onsubmit="event.preventDefault();">
+      <input type="email" placeholder="Join the overlap..." required class="flex-1 px-8 py-5 rounded-2xl border-2 border-[#171e19] bg-white text-lg font-bold focus:outline-none transition-custom">
+      <button type="submit" class="bg-[#171e19] text-white font-anton text-2xl px-12 py-5 rounded-2xl hover:bg-[#272727] hover:scale-105 transition-custom shadow-2xl">GET ACCESS</button>
+    </form>
+
+    <div class="flex flex-col items-center gap-4">
+      <p class="text-sm text-[#171e19]/60 font-medium">Join 500+ musicians and marketers figuring this out.</p>
+      <p class="text-[10px] text-[#171e19]/40 font-bold uppercase tracking-widest">I wrote big checks to the gov, now I'm just here to grow.</p>
+    </div>
+  </div>
+</section>
+```
+
+### Footer
+```html
+<footer class="bg-[#171e19] text-[#b7c6c2] py-20 px-8 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">
+    <div class="space-y-6">
+      <div class="font-anton text-3xl text-white">THE OVERLAP<span class="text-[#ffe17c]">.</span></div>
+      <p class="text-sm leading-relaxed max-w-xs opacity-70">Where years of seven-figure marketing scale meets the reality of rebuilding with AI from ground zero.</p>
+    </div>
+    <div class="flex flex-col gap-4">
+      <span class="text-white font-anton text-lg tracking-widest mb-2">NAVIGATE</span>
+      <a href="#" class="hover:text-[#ffe17c] transition-colors text-sm">The Archive</a>
+      <a href="#" class="hover:text-[#ffe17c] transition-colors text-sm">My Story</a>
+      <a href="#" class="hover:text-[#ffe17c] transition-colors text-sm">Contact</a>
+    </div>
+    <div class="flex flex-col gap-4">
+      <span class="text-white font-anton text-lg tracking-widest mb-2">CONNECT</span>
+      <a href="#" class="hover:text-[#ffe17c] transition-colors text-sm">Twitter / X</a>
+      <a href="#" class="hover:text-[#ffe17c] transition-colors text-sm">YouTube</a>
+      <div class="mt-4 text-[10px] uppercase font-bold tracking-[0.2em] opacity-40">© 2024 The Overlap Newsletter.</div>
+    </div>
+  </div>
+</footer>
+```
+
+## Next Steps (When You Return)
+1. Add photos (onstage + hospital gown images) to featured issue or hero
+2. Create archive/about pages
+3. Set up actual email integration
+4. Consider reusable components for cards/nav
+5. Add more sample issues
+
+## Design Draft Link
+Homepage: https://p.superdesign.dev/draft/9d7f7d4a-b0b3-439d-b43b-543b86aa1eaf
